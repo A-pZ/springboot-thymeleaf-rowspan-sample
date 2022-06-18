@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/{version}/css/bootstrap.min.css(version=${@webjarsConfig.bootstrap})}" />
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		<table class="table table-bordered table-striped table-hover">
+			<thead>
+				<tr>
+					<th>グループ番号</th>
+					<th>商品番号</th>
+					<th>商品名</th>
+				</tr>
+			</thead>
+			<tbody>
+				<ins th:each="itemGroup: ${itemGroups}">
+					<tr th:each="item: ${itemGroup.items}">
+						<td th:if="${itemStat.first}" th:inline="text" th:rowspan="${itemStat.size}">[[${itemGroup.groupId}]]</td>
+						<td th:inline="text">[[${item.itemId}]]</td>
+						<td th:inline="text">[[${item.name}]]</td>
+					</tr>
+				</ins>
+			</tbody>
+		</table>
+	</div>
+</div>
+<script th:src="@{/webjars/bootstrap/{version}/js/bootstrap.min.js(version=${@webjarsConfig.bootstrap})}"></script>
+</body>
+</html>

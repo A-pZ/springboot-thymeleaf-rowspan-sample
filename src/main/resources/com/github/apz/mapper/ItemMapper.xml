@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.apz.mapper.ItemMapper">
+	<resultMap type="com.github.apz.model.item.ItemGroup" id="itemGroup">
+		<result column="group_id" property="groupId"/>
+		<collection property="items" ofType="com.github.apz.model.item.Item">
+			<result column="item_id" property="itemId"/>
+			<result column="name" property="name"/>
+		</collection>
+	</resultMap>
+	
+	<select id="findBy" resultMap="itemGroup">
+		SELECT 
+			item_group.group_id
+			, item.item_id
+			, item.name
+		FROM 
+			item 
+		INNER JOIN 
+			item_group
+			ON item.item_id = item_group.item_id 
+		ORDER BY item_group.group_id, item.item_id
+	</select>
+</mapper>
